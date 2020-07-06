@@ -37,14 +37,18 @@ export async function up(knex: Knex): Promise<any> {
 
 
 export async function down(knex: Knex): Promise<any> {
-    knex.schema.hasTable('billing_address').then(function(exists) {
-        if (exists) {
-          return knex.schema.dropTable('billing_address')
-        }
-      })
-      .catch(function(error) {
-        console.error(error);
-      });
+  return knex.schema.dropTableIfExists("billing_address");
+  /*
+  return knex.schema.hasTable('billing_address').then(function(exists) {
+    console.log(exists)
+      if (exists) {
+        return knex.schema.dropTable('billing_address')
+      }
+    })
+    .catch(function(error) {
+      console.error(error);
+    });
+  */
 }
 
 
